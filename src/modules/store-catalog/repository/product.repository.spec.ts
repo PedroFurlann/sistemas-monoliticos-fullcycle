@@ -27,18 +27,18 @@ describe("Product Repository Test", () => {
       name: "Product 1",
       salesPrice: 10,
       description: "Description of product 1",
-    })
+    });
 
     await ProductModel.create({
       id: "2",
       name: "Product 2",
       salesPrice: 20,
       description: "Description of product 2",
-    })
+    });
 
     const productRepository = new ProductRepository();
     const products = await productRepository.findAll();
-    
+
     expect(products).toHaveLength(2);
     expect(products[0].id.id).toEqual("1");
     expect(products[0].name).toEqual("Product 1");
@@ -56,7 +56,7 @@ describe("Product Repository Test", () => {
       name: "Product 1",
       salesPrice: 10,
       description: "Description of product 1",
-    })
+    });
 
     const productRepository = new ProductRepository();
     const product = await productRepository.find("1");

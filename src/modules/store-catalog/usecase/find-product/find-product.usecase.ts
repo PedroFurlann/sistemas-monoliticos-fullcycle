@@ -1,4 +1,4 @@
-import ProductGateway from "../../../gateway/product.gateway";
+import ProductGateway from "../../gateway/product.gateway";
 import { FindProductInputDto, FindProductOutputDto } from "./find-product.dto";
 
 export default class FindProductUseCase {

@@ -1,6 +1,6 @@
-import UseCaseInterface from "../../../../@shared/usecase/use-case.interface";
-import ProductGateway from "../../../gateway/product.gateway";
-import Product from "../../product.entity";
+import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
+import ProductGateway from "../../gateway/product.gateway";
+import Product from "../../domain/product.entity";
 import {
   FindAllProductsInputDto,
   FindAllProductsOutputDto,
