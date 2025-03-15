@@ -14,9 +14,9 @@ export default class ProductAdmFacade implements ProductAdmFacadeInterface {
   private _addProductUseCase: UseCaseInterface;
   private _checkStockUseCase: UseCaseInterface;
 
-  constructor(usecasesProps: UseCasesProps) {
-    this._addProductUseCase = usecasesProps.addProductUseCase;
-    this._checkStockUseCase = usecasesProps.checkStockUseCase;
+  constructor(props: UseCasesProps) {
+    this._addProductUseCase = props.addProductUseCase;
+    this._checkStockUseCase = props.checkStockUseCase;
   }
 
   addProduct(input: AddProductFacadeInputDto): Promise<void> {

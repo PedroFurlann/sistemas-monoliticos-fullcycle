@@ -1,5 +1,5 @@
 export interface FindStoreCatalogFacadeInputDto {
-  id: string;
+  productId: string;
 }
 
 export interface FindStoreCatalogFacadeOutputDto {
