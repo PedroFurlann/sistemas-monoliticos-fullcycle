@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize-typescript"
 import { ClientModel } from "./client.model";
 import ClientRepository from "./client.repository";
+import Client from "../domain/client.entity";
+import Id from "../../@shared/domain/value-object/id.value-object";
 
 describe("Client Repository Test", () => {
   let sequelize: Sequelize;
@@ -35,9 +37,34 @@ describe("Client Repository Test", () => {
 
     const result = await repository.find(client.id);
 
-    expect(result.id.id).toBe(client.id);
-    expect(result.name).toBe(client.name);
-    expect(result.email).toBe(client.email);
-    expect(result.address).toBe(client.address);
+    expect(result.id.id).toEqual(client.id);
+    expect(result.name).toEqual(client.name);
+    expect(result.email).toEqual(client.email);
+    expect(result.address).toEqual(client.address);
+    expect(result.createdAt).toEqual(client.createdAt);
+    expect(result.updatedAt).toEqual(client.updatedAt);
+  })
+
+  it("should create a client", async () => {
+    const client = new Client({
+      id: new Id("1"),
+      name: "Client 1",
+      email: "example@example.com",
+      address: "Address of client 1",
+    })
+
+    const repository = new ClientRepository();
+    await repository.add(client);
+
+    const clientDb = await ClientModel.findOne({
+      where: { id: client.id.id },
+    });
+
+    expect(client.id.id).toEqual(clientDb.id);
+    expect(client.name).toEqual(clientDb.name);
+    expect(client.email).toEqual(clientDb.email);
+    expect(client.address).toEqual(clientDb.address);
+    expect(client.createdAt).toEqual(clientDb.createdAt);
+    expect(client.updatedAt).toEqual(clientDb.updatedAt);
   })
 })
