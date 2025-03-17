@@ -14,7 +14,6 @@ export default class ProcessPaymentUseCase implements UseCaseInterface {
     input: ProcessPaymentInputDto
   ): Promise<ProcessPaymentOutputDto> {
     const transaction = new Transaction({
-      id: new Id(),
       amount: input.amount,
       orderId: input.orderId,
     });
