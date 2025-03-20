@@ -85,6 +85,27 @@ describe("Place Order Use Case Unit Test", () => {
         new Error("Product not found")
       );
     });
+
+    it("should retutn a product", async () => {
+      const mockCatalogFacade = {
+        find: jest.fn().mockResolvedValue({
+          id: "0",
+          name: "Product 0",
+          description: "Description",
+          salesPrice: 0,
+        }),
+      };
+
+      //@ts-expect-error - force set catalogFacade
+      placeOrderUseCase["_catalogFacade"] = mockCatalogFacade;
+
+      const product = await placeOrderUseCase["getProduct"]("0");
+      expect(product.id.id).toBe("0");
+      expect(product.name).toBe("Product 0");
+      expect(product.description).toBe("Description");
+      expect(product.salesPrice).toBe(0);
+      expect(mockCatalogFacade.find).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("execute method", () => {
