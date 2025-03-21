@@ -15,7 +15,7 @@ export default class PaymentFacade implements PaymentFacadeInterface {
     this._processPaymentUseCase = props.processPaymentUseCase;
   }
 
-  async processPayment(
+  async process(
     input: ProcessPaymentFacadeInputDto
   ): Promise<ProcessPaymentOutputDto> {
     return this._processPaymentUseCase.execute(input);

@@ -29,7 +29,7 @@ describe("Payment Facade Test", () => {
       amount: 100,
     }
 
-    const transaction = await facade.processPayment(input);
+    const transaction = await facade.process(input);
 
     expect(transaction.transactionId).toBeDefined();
     expect(transaction.status).toBe("approved");

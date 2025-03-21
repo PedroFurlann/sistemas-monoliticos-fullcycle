@@ -13,5 +13,5 @@ export interface ProcessPaymentFacadeOutputDto {
 }
 
 export default interface PaymentFacadeInterface {
-  processPayment(input: ProcessPaymentFacadeInputDto): Promise<ProcessPaymentFacadeOutputDto>;
+  process(input: ProcessPaymentFacadeInputDto): Promise<ProcessPaymentFacadeOutputDto>;
 }

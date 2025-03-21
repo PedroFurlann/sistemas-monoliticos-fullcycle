@@ -5,34 +5,46 @@ import FindClientUseCase from "./find-client.usecase";
 const client = new Client({
   id: new Id("1"),
   name: "Client 1",
-  email: "email@example.com",
-  address: "Address of client 1"
-})
+  email: "x@x.com",
+  document: "0000000",
+  street: "16 avenus",
+  number: "123",
+  complement: "Ap 400",
+  city: "My city",
+  state: "State",
+  zipCode: "89777310",
+});
 
 const MockRepository = () => {
   return {
     add: jest.fn(),
-    find: jest.fn().mockResolvedValue(client)
-  }
-}
+    find: jest.fn().mockReturnValue(Promise.resolve(client)),
+  };
+};
 
-describe("Find Client usecase unit test", () => {
+describe("Find Client Usecase unit test", () => {
   it("should find a client", async () => {
-    const clientRepository = MockRepository()
-    const findClientUseCase = new FindClientUseCase(clientRepository)
+    const repository = MockRepository();
+    const usecase = new FindClientUseCase(repository);
 
     const input = {
-      clientId: "1"
-    }
+      id: "1",
+    };
 
-    const result = await findClientUseCase.execute(input)
+    const result = await usecase.execute(input);
 
-    expect(clientRepository.find).toHaveBeenCalled()
-    expect(result.id).toBe(client.id.id)
-    expect(result.name).toBe(client.name)
-    expect(result.email).toBe(client.email)
-    expect(result.address).toBe(client.address)
-    expect(result.createdAt).toBe(client.createdAt)
-    expect(result.updatedAt).toBe(client.updatedAt)
-  })
-})
+    expect(repository.find).toHaveBeenCalled();
+    expect(result.id).toEqual(input.id);
+    expect(result.name).toEqual(client.name);
+    expect(result.email).toEqual(client.email);
+    expect(result.document).toEqual(client.document)
+    expect(result.street).toEqual(client.street)
+    expect(result.number).toEqual(client.number)
+    expect(result.complement).toEqual(client.complement)
+    expect(result.city).toEqual(client.city)
+    expect(result.state).toEqual(client.state)
+    expect(result.zipCode).toEqual(client.zipCode)
+    expect(result.createdAt).toEqual(client.createdAt);
+    expect(result.updatedAt).toEqual(client.updatedAt);
+  });
+});
